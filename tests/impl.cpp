@@ -5984,9 +5984,13 @@ result_t test_mm_stream_si32(const SSE2NEONTestImpl &impl, uint32_t iter)
 result_t test_mm_stream_si64(const SSE2NEONTestImpl &impl, uint32_t iter)
 {
     const int64_t a = (const int64_t) impl.mTestInts[iter];
+// #if defined(__x86_64__) || defined(__i386__)
+//     long long int p[1];
+// #else
+//     int64_t p[1];
+// #endif
     int64_t p[1];
-
-    _mm_stream_si64((long long int*)p, a);
+    _mm_stream_si64((long long *)p, a);
     ASSERT_RETURN(p[0] == a);
     return TEST_SUCCESS;
 }
